@@ -1,4 +1,4 @@
-# testbeginner2
+#test_gen
 
 これはPython学習のための最初のリポジトリです。  
 GitHubの使い方とコード公開の基礎を学びました。
