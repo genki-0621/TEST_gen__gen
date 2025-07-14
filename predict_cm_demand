@@ -1,0 +1,45 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+# データ（例：広告費と売上）
+def predict_sales(ad_cost, model):
+    log_pred = model.predict([[ad_cost]])
+    return np.exp(log_pred)[0] # cm ad_cost log kaikimoderuga yosokuuriage kaesu
+    
+ad_cost = np.array([100, 200, 300, 400, 500]).reshape(-1, 1)  # 広告費
+sales = np.array([1200, 2500, 4800, 9500, 18000])             # 売上（成長）
+
+# 売上を log変換
+log_sales = np.log(sales)
+
+# 線形回帰モデルを学習
+model = LinearRegression()
+model.fit(ad_cost, log_sales)
+
+# 予測（log空間）
+future_ad = np.array([[800]])
+future_ads = np.array([[600], [700], [800], [900], [1000]])
+future_sales = np.exp(model.predict(future_ads))
+
+
+predicted_log_sales = model.predict(future_ad)
+
+# 予測を元に戻す（expで逆変換）
+predicted_sales = np.exp(predicted_log_sales)
+
+
+
+for cost, sale in zip(future_ads, future_sales):
+    print(f"広告費{cost[0]}円 → 予測売上：{sale:.0f}円")
+print(f"広告費800のときの予測売上：{predicted_sales[0]:,.0f}円")
+
+# グラフ描画
+plt.scatter(ad_cost, sales, label="実データ", color='blue')
+plt.plot(ad_cost, np.exp(model.predict(ad_cost)), label="予測（log回帰）", color='red')
+plt.xlabel("広告費")
+plt.ylabel("売上")
+plt.legend()
+plt.title("log変換で売上予測")
+plt.grid(True)
+plt.show()
