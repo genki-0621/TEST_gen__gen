@@ -1,0 +1,92 @@
+
+
+## コード全文
+```python
+import tkinter as tk
+import random
+
+class ExcuseGenerator:
+    def __init__(self):
+        self.excuses = [
+            "猫がキーボード踏んでたんで",
+            "電波が……（切れる）",
+            "宇宙と交信してたので",
+            "心のWi-Fiが不安定でした",
+            "オラクル（占い師）が反対したんで",
+            "時空の歪みに巻き込まれました",
+            "夢と現実の境目で迷子になってました",
+            "昨日の自分に任せたので覚えてません",
+            "運命のいたずらです",
+            "なぜかアボカドが爆発しました",
+            "上司の前世に呪われてまして",
+            "カレーを煮込みすぎて次元がねじれた",
+            "AIに任せたら暴走しました",
+            "画面の中の俺が反対したので",
+            "それはバグです。仕様です。気のせいです。",
+            "夢オチだと思ってました",
+            "100年後の自分に頼んだので",
+            "推しの尊さにやられました",
+            "運命のコインが裏でした",
+            "魔法のMPが切れてました",
+            "ドーナツに気を取られてました",
+            "一回全部リセットしたら戻れなくなった",
+            "心の中のタスク管理が崩壊しました",
+            "自分探しの旅に出てました（5分間）",
+            "Google先生が無視しました",
+            "ポエム書いてたら終わってました",
+            "月が綺麗だったので"
+        ]
+
+def draw(self):
+        return random.choice(self.excuses)
+
+def show_excuse():
+    excuse = excuse_maker.draw()
+    result_label.config(text=excuse)
+
+# GUI設定
+root = tk.Tk()
+root.title("言い訳おみくじ")
+root.geometry("400x200")
+
+excuse_maker = ExcuseGenerator()
+
+btn = tk.Button(root, text="今日の言い訳を引く", command=show_excuse, font=("Meiryo", 14))
+btn.pack(pady=20)
+
+result_label = tk.Label(root, text="", font=("Meiryo", 14), wraplength=350, justify="center")
+result_label.pack()
+
+root.mainloop()
+```
+
+＃＃コード解説
+```PYTHON
+class ExcuseGenerator:
+    def __init__(self):
+        self.excuses = []
+def draw(self):
+        return random.choice(self.excuses)
+```
+言い訳クラスの作成と定義とランダムに一つ値を返します。主語的なやつ
+
+```PYTHON
+def show_excuse():
+    excuse = excuse_maker.draw()
+    result_label.config(text=excuse)
+```
+ボタンを押したときに呼ばれ、ラベルに新しい言い訳を表示させます。
+
+```PYTHON
+root = tk.Tk()
+root.title("言い訳おみくじ")
+root.geometry("400x200")
+excuse_maker = ExcuseGenerator()
+
+btn = tk.Button(root, text="今日の言い訳を引く", command=show_excuse, font=("Meiryo", 14))
+btn.pack(pady=20)
+
+result_label = tk.Label(root, text="", font=("Meiryo", 14), wraplength=350, justify="center")
+result_label.pack()
+
+root.mainloop()
